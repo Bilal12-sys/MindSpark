@@ -1,0 +1,87 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSpark |Quiz</title>
+    <link rel="shortcut icon" href="images/mindSpark.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+    <nav class="nav" id="nav">
+        <div class="logo">
+            <h2><i class="fa-solid fa-brain"></i> Mind <span>Spark</span></h2>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Quizzes</a>
+            <a href="#">Result</a>
+        </div>
+        <div class="user-box">
+            <abbr title="Account"><img src="https://via.placeholder.com/45" alt="user" id="user"></abbr>
+        </div>
+    </nav>
+
+    <div id="result-display-area"></div>
+
+    <main class="quiz-wrapper" id="quizz">
+        <div id="quiz-container" class="quiz-card">
+            <div class="quiz-header">
+                <div class="quiz-logo">
+                    <i class="fa-solid fa-brain"></i> Mind<span>Spark</span>
+                </div>
+                <div class="timer-box">
+                    <i class="fa-solid fa-clock"></i> <span id="timer"></span>
+                </div>
+            </div>
+
+            <div class="progress-wrapper">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div id="quiz-text">
+                <h3 class="question-text" id="question">What is HTML?</h3> 
+                <p class="instruction">Please select one of the answers to continue.</p>
+
+                <div id="quiz-content">
+                    <div class="q option">Hyper Text Markup Language</div>
+                    <div class="q option">High Tech Modern Language</div>
+                    <div class="q option">Hyper Transfer Markup Language</div>
+                    <div class="q option">Home Tool Markup Language</div>
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button class="btn-next" id="next-btn">
+                    Next Question <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="bottomnav" id="bn">
+        <div class="nav-item active">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Learn</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Quiz</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Stats</span>
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

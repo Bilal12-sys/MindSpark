@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSpark | Dashboard</title>
+    <link rel="shortcut icon" href="images/mindSpark.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="i class="fa-solid fa-diamond" type="image/x-icon">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    
+    <nav class="nav">
+    <div class="logo">
+        <h2><i class="fa-solid fa-brain"></i> Mind <span>Spark</span></h2>
+    </div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#">Quizes</a>
+        <a href="#">Result</a>
+    </div>
+
+    <div class="user-box">
+        <abbr title="Account"><img src="" alt="img" id="user"></abbr>
+    </div>
+</nav>
+
+
+
+
+<div class="main-container">
+    
+    <div class="quiz-card" data-quiz="html5">
+        <div class="icon-tag html-bg"><span><i class="fa-brands fa-html5"></i></span></div>
+        <div class="card-body">
+            <h3>HTML Quiz</h3>
+            <p>Master the semantic architecture of the modern web.</p>
+        </div>
+        <div class="card-footer">
+            <span class="q-count">10 Questions</span>
+            <button class="start-btn" id="btn1">Start Quiz <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="quiz-card" data-quiz="css3">
+        <div class="icon-tag css-bg"><span><i class="fa-brands fa-css3-alt"></i></span></div>
+        <div class="card-body">
+            <h3>CSS Quiz</h3>
+            <p>Test your layout skills, from Flexbox to Grid mastery.</p>
+        </div>
+        <div class="card-footer">
+            <span class="q-count">10 Questions</span>
+            <button class="start-btn" id="btn2">Start Quiz <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="quiz-card" data-quiz="javascript">
+        <div class="icon-tag js-bg"><span><i class="fa-brands fa-square-js"></i></span></div>
+        <div class="card-body">
+            <h3>JavaScript Quiz</h3>
+            <p>Dive into logic, functions, and the DOM engine.</p>
+        </div>
+        <div class="card-footer">
+            <span class="q-count">10 Questions</span>
+            <button class="start-btn" id="btn3">Start Quiz <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="bottomnav">
+    <div class="nav-item active">
+        <i class="fa-solid fa-graduation-cap" id="home"></i>
+        <span>Learn</span>
+    </div>
+    <div class="nav-item">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Quiz</span>
+    </div>
+    <div class="nav-item">
+        <i class="fa-solid fa-chart-simple"></i>
+        <span>Stats</span>
+    </div>
+    <div class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </div>
+</div>
+
+</body>
+<script src="script.js"></script>
+<script src="quiz.js"></script>
+</html>

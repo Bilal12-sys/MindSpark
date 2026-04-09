@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSpark | Login-signin</title>
+    <link rel="shortcut icon" href="images/mindSpark.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="login-sign.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <i class="fa-solid fa-brain"></i>
+                <h1>Mind<span>Spark</span></h1>
+            </div>
+            
+            <div id="signup-section">
+                <h2>Create Account</h2>
+                <p>Join the community and start your journey.</p>
+
+                <form id="signup-form" autocomplete="on">
+                    <div class="input-field profile-upload-field">
+                        <i class="fa-solid fa-image"></i>
+                        <input type="text" placeholder="Upload Profile Picture" readonly onclick="document.getElementById('profile-file').click();">
+                        <div class="input-preview" id="imagePreview">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <input type="file" id="profile-file" accept="image/*" hidden>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Full Name" required id="signup-name">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email Address" required id="signup-email">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" required id="signup-pass">
+                    </div>
+
+                    <button type="submit" class="btn-auth">Sign Up</button>
+                </form>
+                <p class="toggle-text">Already have an account? <a href="#" id="go-to-login">Login</a></p>
+            </div>
+
+            <div id="login-section" style="display: none;">
+                <h2>Welcome Back</h2>
+                <p>Login to access your dashboard.</p>
+
+                <form id="login-form">
+                    <div class="input-field">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Full Name" required id="login-name">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" required id="login-pass">
+                    </div>
+
+                    <button type="submit" class="btn-auth">Login</button>
+                </form>
+                <p class="toggle-text">New here? <a href="#" id="go-to-signup">Create one</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

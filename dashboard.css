@@ -78,6 +78,18 @@ body {
     object-fit: cover;
 }
 
+-- User Profile & Account Card --- */
+.user-box-1{ position: relative; } /* Added relative to anchor the card */
+
+#user-1 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1.5px solid var(--dark);
+    object-fit: cover;
+}
 #user:hover { transform: scale(1.1); border-color: var(--primary); }
 
 .account {

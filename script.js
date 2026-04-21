@@ -106,11 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const profileImg = document.getElementById("user");
-    if (profileImg) {
-        const loggedUser = JSON.parse(localStorage.getItem('mindspark_loggedUser'));
-        if (loggedUser && loggedUser.photo) profileImg.src = loggedUser.photo;
-    }
+    const loggedUser = JSON.parse(localStorage.getItem('mindspark_loggedUser'));
+    const defaultPhoto = 'images/user.jpg';
+    const photoSrc = (loggedUser && loggedUser.photo && loggedUser.photo.trim() !== "") ? loggedUser.photo : defaultPhoto;
+    const profileElements = document.querySelectorAll('#user, #user-1, .profile-img, .user-img');
+    profileElements.forEach(el => {
+        if (!el) return;
+        if (el.tagName === 'IMG') {
+            el.src = photoSrc;
+        } else {
+            el.innerHTML = `<img src="${photoSrc}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+        }
+    });
 
     const b1 = document.getElementById('btn1');
     const b2 = document.getElementById('btn2');

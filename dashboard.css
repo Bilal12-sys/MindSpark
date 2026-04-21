@@ -90,7 +90,7 @@ body {
     border: 1.5px solid var(--dark);
     object-fit: cover;
 }
-#user:hover { transform: scale(1.1); border-color: var(--primary); }
+#user-1:hover { transform: scale(1.1); border-color: var(--primary); }
 
 .account {
     position: absolute; /* Essential fix: prevents card from pushing the nav down */

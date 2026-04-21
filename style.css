@@ -246,6 +246,22 @@ body {
     animation: slideUp 0.5s ease-out;
 }
 
+
+-- User Profile & Account Card --- */
+.user-box-1{ position: relative; } /* Added relative to anchor the card */
+
+#user-1 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1.5px solid var(--dark);
+    object-fit: cover;
+}
+#user-1:hover { transform: scale(1.1); border-color: var(--primary); }
+
+
 @keyframes slideUp {
     from { transform: translateY(100%); }
     to { transform: translateY(0); }

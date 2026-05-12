@@ -246,6 +246,13 @@ body {
     animation: slideUp 0.5s ease-out;
 }
 
+.profile-pic{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+
 
 -- User Profile & Account Card --- */
 .user-box-1{ position: relative; } /* Added relative to anchor the card */

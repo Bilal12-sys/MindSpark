@@ -1,25 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let home = document.getElementById("home");
-    let getb = document.getElementById("getbtn");
-
-    if (getb) {
-        getb.addEventListener('click', () => {
-            window.location.href = "log-sign.html";
-        });
-    }
-    if (home) {
-        home.addEventListener('click', () =>{
-            window.location.href = "index.html";
-        });
-    }
-
+    const homeBtn = document.getElementById("home");
+    const getBtn = document.getElementById("getbtn");
+    
     const signupSection = document.getElementById('signup-section');
     const loginSection = document.getElementById('login-section');
-    const signupForm = document.getElementById('signup-form');
-    const loginForm = document.getElementById('login-form');
+    const toggleToLogin = document.getElementById('toggle-to-login');
+    const toggleToSignup = document.getElementById('toggle-to-signup');
+    
     const goToLoginBtn = document.getElementById('go-to-login');
     const goToSignupBtn = document.getElementById('go-to-signup');
+    const link = document.getElementById('link');
 
+    const signupForm = document.getElementById('signup-form');
+    const loginForm = document.getElementById('login-form');
+    
     const signupName = document.getElementById('signup-name');
     const signupEmail = document.getElementById('signup-email');
     const signupPass = document.getElementById('signup-pass');
@@ -52,19 +46,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (goToLoginBtn) {
-        goToLoginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (signupSection) signupSection.style.display = "none";
-            if (loginSection) loginSection.style.display = "block";
-        });
+    if (getBtn) {
+        getBtn.addEventListener('click', () => { window.location.href = "log-sign.html"; });
+    }
+    if (homeBtn) {
+        homeBtn.addEventListener('click', () => { window.location.href = "index.html"; });
     }
 
-    if (goToSignupBtn) {
-        goToSignupBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (loginSection) loginSection.style.display = "none";
-            if (signupSection) signupSection.style.display = "block";
+    const showLogin = () => {
+        if (signupSection) signupSection.style.display = "none";
+        if (loginSection) loginSection.style.display = "block";
+        if (toggleToLogin) toggleToLogin.style.display = "none";
+        if (toggleToSignup) toggleToSignup.style.display = "block";
+    };
+
+    const showSignup = () => {
+        if (loginSection) loginSection.style.display = "none";
+        if (signupSection) signupSection.style.display = "block";
+        if (toggleToSignup) toggleToSignup.style.display = "none";
+        if (toggleToLogin) toggleToLogin.style.display = "block";
+    };
+
+    if (goToLoginBtn) goToLoginBtn.addEventListener('click', (e) => { e.preventDefault(); showLogin(); });
+    if (goToSignupBtn) goToSignupBtn.addEventListener('click', (e) => { e.preventDefault(); showSignup(); });
+    
+    if (link) {
+        link.style.cursor = "pointer";
+        link.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            showSignup(); 
         });
     }
 
@@ -72,22 +82,29 @@ document.addEventListener('DOMContentLoaded', () => {
         signupForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const users = JSON.parse(localStorage.getItem('mindspark_users')) || [];
-            if (users.find(u => u.email === signupEmail.value || u.name === signupName.value)) {
+            const nameVal = signupName.value.trim();
+            const emailVal = signupEmail.value.trim();
+
+            if (users.find(u => u.email === emailVal || u.name === nameVal)) {
                 return Swal.fire({ icon: 'error', title: 'Error', text: 'Name or Email already exists!' });
             }
+
             const newUser = { 
-                name: signupName.value.trim(), 
-                email: signupEmail.value.trim(), 
+                name: nameVal, 
+                email: emailVal, 
                 password: signupPass.value,
-                photo: userPhotoBase64 
+                photo: userPhotoBase64 || null 
             };
+
             users.push(newUser);
             localStorage.setItem('mindspark_users', JSON.stringify(users));
-            Swal.fire({ icon: 'success', title: 'Account Created!', timer: 2000, showConfirmButton: false }).then(() => {
-                if (loginName) loginName.value = signupName.value;
-                if (loginPass) loginPass.value = signupPass.value;
+
+            Swal.fire({ icon: 'success', title: 'Account Created!', timer: 1500, showConfirmButton: false }).then(() => {
+                loginName.value = nameVal;
+                loginPass.value = signupPass.value;
                 signupForm.reset();
-                if (goToLoginBtn) goToLoginBtn.click();
+                if (imagePreview) imagePreview.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+                showLogin();
             });
         });
     }
@@ -97,25 +114,24 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const users = JSON.parse(localStorage.getItem('mindspark_users')) || [];
             const foundUser = users.find(u => u.name === loginName.value.trim() && u.password === loginPass.value);
+            
             if (foundUser) {
                 localStorage.setItem('mindspark_loggedUser', JSON.stringify(foundUser));
                 window.location.href = 'dashboard.html';
             } else {
-                Swal.fire({ icon: 'error', title: 'Login Failed' });
+                Swal.fire({ icon: 'error', title: 'Login Failed', text: 'Invalid username or password' });
             }
         });
     }
 
-    const loggedUser = JSON.parse(localStorage.getItem('mindspark_loggedUser'));
-    const defaultPhoto = 'images/user.jpg';
-    const photoSrc = (loggedUser && loggedUser.photo && loggedUser.photo.trim() !== "") ? loggedUser.photo : defaultPhoto;
-    const profileElements = document.querySelectorAll('#user, #user-1, .profile-img, .user-img');
-    profileElements.forEach(el => {
-        if (!el) return;
-        if (el.tagName === 'IMG') {
-            el.src = photoSrc;
+    const user = JSON.parse(localStorage.getItem("mindspark_loggedUser"));
+    const photo = (user && user.photo) ? user.photo : "images/user.jpg";
+
+    document.querySelectorAll("#user, #user-1, .profile-img, .user-img").forEach(el => {
+        if (el.tagName === "IMG") {
+            el.src = photo;
         } else {
-            el.innerHTML = `<img src="${photoSrc}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+            el.innerHTML = `<img src="${photo}" class="profile-pic" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
         }
     });
 

@@ -12,67 +12,86 @@
 <body>
     <div class="auth-container">
         <div class="auth-box">
-            <div class="auth-logo">
-                <i class="fa-solid fa-brain"></i>
-                <h1>Mind<span>Spark</span></h1>
-            </div>
             
-            <div id="signup-section">
-                <h2>Create Account</h2>
-                <p>Join the community and start your journey.</p>
-
-                <form id="signup-form" autocomplete="on">
-                    <div class="input-field profile-upload-field">
-                        <i class="fa-solid fa-image"></i>
-                        <input type="text" placeholder="Upload Profile Picture" readonly onclick="document.getElementById('profile-file').click();">
-                        <div class="input-preview" id="imagePreview">
-                            <i class="fa-solid fa-user-plus"></i>
+            <div class="form-container">
+                <div id="signup-section">
+                    <div class="auth-logo">
+                        <i class="fa-solid fa-brain"></i>
+                        <h1>Mind<span>Spark</span></h1>
+                    </div>
+                    <h2>Create Account</h2>
+                    <div class="dd">
+                    <p>Enter your details to get started</p>
+                    </div>
+                    <form id="signup-form">
+                        <div class="input-field profile-upload-field">
+                            <i class="fa-solid fa-image"></i>
+                            <input type="text" placeholder="Upload Profile" readonly onclick="document.getElementById('profile-file').click();">
+                            <div class="input-preview" id="imagePreview">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <input type="file" id="profile-file" accept="image/*" hidden>
                         </div>
-                        <input type="file" id="profile-file" accept="image/*" hidden>
-                    </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Full Name" required id="signup-name">
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="Email Address" required id="signup-email">
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" placeholder="Password" required id="signup-pass">
+                        </div>
+                        <button type="submit" class="btn-auth">Sign Up</button>
+                        <p></p>
+                    </form>
+                </div>
 
-                    <div class="input-field">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="Full Name" required id="signup-name">
+                <div id="login-section" style="display: none;">
+                    <div class="auth-logo">
+                        <i class="fa-solid fa-brain"></i>
+                        <h1>Mind<span>Spark</span></h1>
                     </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email Address" required id="signup-email">
+                    <h2>Sign In</h2>
+                    <div class="dd">
+                    <p>Please enter your login credentials</p>
                     </div>
+                    <form id="login-form">
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" placeholder="Full Name" required id="login-name">
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" placeholder="Password" required id="login-pass">
+                        </div>
+                        <button type="submit" class="btn-auth">Login</button>
+                            <p class="link" id="link">Don't have an account? <span>Create one</span></p>
 
-                    <div class="input-field">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password" required id="signup-pass">
-                    </div>
-
-                    <button type="submit" class="btn-auth">Sign Up</button>
-                </form>
-                <p class="toggle-text">Already have an account? <a href="#" id="go-to-login">Login</a></p>
+                    </form>
+                </div>
             </div>
 
-            <div id="login-section" style="display: none;">
-                <h2>Welcome Back</h2>
-                <p>Login to access your dashboard.</p>
-
-                <form id="login-form">
-                    <div class="input-field">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="Full Name" required id="login-name">
+            <div class="overlay-container">
+                <div class="overlay-panel">
+                    <div id="toggle-to-login">
+                        <h2>Hello, There!</h2>
+                        <p>Already have an account? Login to stay connected with us.</p>
+                        <button class="ghost" id="go-to-login">SIGN IN</button>
                     </div>
-
-                    <div class="input-field">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password" required id="login-pass">
+                    <div id="toggle-to-signup" style="display: none;">
+                        <h2>Welcome Back!</h2>
+                        <p>New here? Start your journey with us today.</p>
+                        <button class="ghost" id="go-to-signup">Login</button>
+                    
                     </div>
-
-                    <button type="submit" class="btn-auth">Login</button>
-                </form>
-                <p class="toggle-text">New here? <a href="#" id="go-to-signup">Create one</a></p>
+                </div>
             </div>
+
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

@@ -16,9 +16,11 @@
 body {
     background: var(--bg-light);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+}
+
+#link {
+    display: none;
 }
 
 .auth-container {
@@ -26,52 +28,96 @@ body {
     max-width: 1200px;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 25px;
+    height: 100vh;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .auth-box {
     background: var(--white);
     width: 100%;
     max-width: 1000px;
-    height: 90vh;
+    height: 91vh;
     border-radius: 24px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     display: flex;
     overflow: hidden;
     position: relative;
-    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: slideUp 0.6s ease-in-out;
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
+    from { opacity: 0; transform: translateY(80px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .form-container {
     flex: 1.2;
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    transition: transform 0.6s ease-in-out;
+}
+
+#signup-section, #login-section {
+    width: 100%;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.auth-box.active-login #signup-section {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.auth-box:not(.active-login) #login-section {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.overmain {
+    flex: 0.8;
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    z-index: 10;
 }
 
 .overlay-container {
-    flex: 0.8;
+    width: 100%;
     background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
     color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 50px;
     text-align: center;
-    border-radius: 80px 0 0 120px;
-    transition: all 0.5s ease-in-out;
+    transition: border-radius 0.6s ease-in-out;
+}
+
+.auth-box:not(.active-login) .overlay-container {
+    border-radius: 80px 0 0 80px;
+}
+
+.auth-box.active-login .overmain {
+    transform: translateX(-150%);
+}
+
+.auth-box.active-login .form-container {
+    transform: translateX(66.6%);
+
+}
+
+.auth-box.active-login .overlay-container {
+    border-radius: 0 80px 80px 0;
 }
 
 .auth-logo {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -103,11 +149,16 @@ h2 {
     font-weight: 800;
 }
 
-.link{
-    display: none;
+.link {
+    font-size: 0.85rem;
+    color: gray;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: 500;
+    display: block;
 }
 
-.dd{
+.dd {
     display: flex;
     justify-content: center;
 }
@@ -117,7 +168,7 @@ p {
     font-size: 0.95rem; 
     margin-bottom: 10px; 
     text-align: center;
-    max-width: 80%;
+    max-width: 100%;
 }
 
 form {
@@ -129,14 +180,14 @@ form {
 
 .input-field {
     width: 35vw;
-    
+    background: var(--white);
     position: relative;
     margin-bottom: 12px;
 }
 
 .input-field i {
     position: absolute;
-    left: 16px;
+    left: 8px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--gray);
@@ -148,6 +199,7 @@ form {
     padding: 14px 16px 14px 50px;
     border: 2px solid #f1f5f9;
     border-radius: 12px;
+    box-shadow: 0px 1px 1px rgba(128, 128, 128, 0.301);
     outline: none;
     background: #f8fafc;
     font-size: 1rem;
@@ -157,7 +209,7 @@ form {
 .input-field input:focus {
     border-color: var(--primary);
     background: #fff;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08);
+    box-shadow: 1px 4px 12px rgba(79, 70, 229, 0.08);
 }
 
 .btn-auth {
@@ -172,6 +224,7 @@ form {
     transition: all 0.3s ease;
     width: 100%;
     max-width: 400px;
+    box-shadow: 1px 1px 3px var(--gray);
     margin-top: 10px;
     display: block;
 }
@@ -183,14 +236,7 @@ form {
     box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
 }
 
-.link {
-    font-size: 0.85rem;
-    color: gray;
-    text-decoration: none;
-    margin-top: 20px;
-    font-weight: 500;
-}
-.link span{
+.link span {
     color: var(--primary);
 }
 
@@ -205,6 +251,7 @@ form {
     background: transparent;
     border: 2px solid #ffffff;
     color: #ffffff;
+    box-shadow: 1px 0px 8px var(--gray);
     padding: 12px 45px;
     border-radius: 12px;
     font-weight: 700;
@@ -221,89 +268,61 @@ form {
 
 .input-preview {
     position: absolute;
-    right: 12px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     width: 36px;
     height: 36px;
     border-radius: 50%;
     background: #fff;
+    border: 1px solid var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--primary-soft);
+    border: 2px solid var(--primary);
     overflow: hidden;
     z-index: 5;
 }
+
 @media (max-width: 850px) {
     body {
         overflow: auto;
         display: block;
     }
-
     .auth-container {
-        height: auto;
-        
+        height: 100vh;
         padding: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
     .auth-box {
-        flex-direction: column;
+        flex-direction: column !important;
         height: auto;
-        min-height: 90vh;
         max-width: 90vw;
         border-radius: 20px;
-        margin: 20px 0;
     }
-
-    .overlay-container {
-       display: none;
+    .auth-box.active-login .overmain,
+    .auth-box.active-login .form-container {
+        transform: none;
     }
-
+    .overmain {
+        display: none;
+    }
     .form-container {
         flex: none;
         width: 100%;
-        height: 90vh;
-        padding: 40px 20px;
+        height: auto;
+        padding: 20px;
         overflow: hidden;
     }
-
-    .auth-logo i {
-        font-size: 2.2rem;
+    .input-field {
+        width: 80vw;
     }
-
-    .auth-logo h1 {
-        font-size: 1.6rem;
-    }
+    h2 { font-size: 1.8rem; }
+    p { font-size: 0.9rem; }
+    .btn-auth { max-width: 100%; }
 
     
-.input-field {
-    width: 80vw;
-    position: relative;
-    margin-bottom: 12px;
-}
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    p {
-        max-width: 100%;
-        font-size: 0.9rem;
-    }
-
-    .input-field, 
-    .btn-auth {
-        max-width: 100%;
-    }
-
-
-
-    .ghost {
-        padding: 10px 30px;
-        margin-top: 15px;
-    }
+#link { font-size: 0.85rem; color: gray; text-decoration: none; margin-top: 20px; font-weight: 500; display: block;}
 }

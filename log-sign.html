@@ -23,7 +23,7 @@
                     <div class="dd">
                     <p>Enter your details to get started</p>
                     </div>
-                    <form id="signup-form">
+                    <form id="signup-form" autocomplete="off">
                         <div class="input-field profile-upload-field">
                             <i class="fa-solid fa-image"></i>
                             <input type="text" placeholder="Upload Profile" readonly onclick="document.getElementById('profile-file').click();">
@@ -58,7 +58,7 @@
                     <div class="dd">
                     <p>Please enter your login credentials</p>
                     </div>
-                    <form id="login-form">
+                    <form id="login-form" autocomplete="off">
                         <div class="input-field">
                             <i class="fa-solid fa-user"></i>
                             <input type="text" placeholder="Full Name" required id="login-name">
@@ -74,6 +74,7 @@
                 </div>
             </div>
 
+            <div class="overmain">
             <div class="overlay-container">
                 <div class="overlay-panel">
                     <div id="toggle-to-login">
@@ -91,6 +92,7 @@
             </div>
 
         </div>
+    </div>
     </div>
     <script src="script.js"></script>
 </body>

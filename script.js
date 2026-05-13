@@ -1,25 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const authBox = document.querySelector('.auth-box');
     const homeBtn = document.getElementById("home");
     const getBtn = document.getElementById("getbtn");
-    
     const signupSection = document.getElementById('signup-section');
     const loginSection = document.getElementById('login-section');
     const toggleToLogin = document.getElementById('toggle-to-login');
     const toggleToSignup = document.getElementById('toggle-to-signup');
-    
     const goToLoginBtn = document.getElementById('go-to-login');
     const goToSignupBtn = document.getElementById('go-to-signup');
     const link = document.getElementById('link');
-
     const signupForm = document.getElementById('signup-form');
     const loginForm = document.getElementById('login-form');
-    
     const signupName = document.getElementById('signup-name');
     const signupEmail = document.getElementById('signup-email');
     const signupPass = document.getElementById('signup-pass');
     const loginName = document.getElementById('login-name');
     const loginPass = document.getElementById('login-pass');
-
     let profileFile = document.getElementById('profile-file');
     let imagePreview = document.getElementById('imagePreview');
     let profileText = document.querySelector('.profile-upload-field input[type="text"]');
@@ -54,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const showLogin = () => {
+        if (authBox) authBox.classList.add('active-login');
         if (signupSection) signupSection.style.display = "none";
         if (loginSection) loginSection.style.display = "block";
         if (toggleToLogin) toggleToLogin.style.display = "none";
@@ -61,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const showSignup = () => {
+        if (authBox) authBox.classList.remove('active-login');
         if (loginSection) loginSection.style.display = "none";
         if (signupSection) signupSection.style.display = "block";
         if (toggleToSignup) toggleToSignup.style.display = "none";
@@ -84,21 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const users = JSON.parse(localStorage.getItem('mindspark_users')) || [];
             const nameVal = signupName.value.trim();
             const emailVal = signupEmail.value.trim();
-
             if (users.find(u => u.email === emailVal || u.name === nameVal)) {
                 return Swal.fire({ icon: 'error', title: 'Error', text: 'Name or Email already exists!' });
             }
-
             const newUser = { 
                 name: nameVal, 
                 email: emailVal, 
                 password: signupPass.value,
                 photo: userPhotoBase64 || null 
             };
-
             users.push(newUser);
             localStorage.setItem('mindspark_users', JSON.stringify(users));
-
             Swal.fire({ icon: 'success', title: 'Account Created!', timer: 1500, showConfirmButton: false }).then(() => {
                 loginName.value = nameVal;
                 loginPass.value = signupPass.value;
@@ -114,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const users = JSON.parse(localStorage.getItem('mindspark_users')) || [];
             const foundUser = users.find(u => u.name === loginName.value.trim() && u.password === loginPass.value);
-            
             if (foundUser) {
                 localStorage.setItem('mindspark_loggedUser', JSON.stringify(foundUser));
                 window.location.href = 'dashboard.html';
@@ -126,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const user = JSON.parse(localStorage.getItem("mindspark_loggedUser"));
     const photo = (user && user.photo) ? user.photo : "images/user.jpg";
-
     document.querySelectorAll("#user, #user-1, .profile-img, .user-img").forEach(el => {
         if (el.tagName === "IMG") {
             el.src = photo;

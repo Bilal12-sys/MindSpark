@@ -8,7 +8,7 @@ const quizData = {
         { id: 6, question: "Which HTML element is used to define important text?", options: ["<important>", "<strong>", "<b>", "<i>"], correct: 1 },
         { id: 7, question: "How can you make a numbered list?", options: ["<ul>", "<list>", "<ol>", "<dl>"], correct: 2 },
         { id: 8, question: "Which input type is used for a slider control?", options: ["search", "range", "slider", "controls"], correct: 1 },
-        { id: 9, question: "What is the correct HTML for inserting an image?", options: ["<img alt='MyImage'>image.gif</img>", "<img href='image.gif'>", "<image src='image.gif'>", "<img src='image.gif'>"], correct: 3 },
+        { id: 9, question: "What is the correct HTML for inserting an image?", options: ["<img alt='MyImage'>image.gif</img>", "<img href='image.gif'>", "<image src='image.gif'>", "<img src=='image.gif'>"], correct: 3 },
         { id: 10, question: "Which HTML5 element is used to display a measurement within a range?", options: ["<range>", "<meter>", "<gauge>", "<measure>"], correct: 1 }
     ],
     css: [
